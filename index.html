@@ -629,31 +629,6 @@ if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.request
 
 makeStars();
 
-// Diagnostic: test all answers and show which ones render blank
-_fontReady.then(() => {
-  const blanks = [];
-  const svg = document.getElementById('ballSvg');
-  answers.forEach(a => {
-    // Temporarily run layout and check if it produces any lines
-    const g = document.getElementById('triText');
-    const before = g.innerHTML;
-    layoutTriangleText(a.text);
-    if (g.innerHTML === '') blanks.push(a.text);
-    g.innerHTML = before;
-  });
-  if (blanks.length > 0) {
-    const el = document.createElement('div');
-    el.style.cssText = 'position:fixed;bottom:10px;left:10px;right:10px;background:rgba(200,0,0,0.85);color:#fff;padding:10px;font-size:12px;font-family:monospace;z-index:9999;border-radius:8px;';
-    el.innerHTML = '<b>BLANK ANSWERS:</b><br>' + blanks.map(t => '• ' + t).join('<br>');
-    document.body.appendChild(el);
-  } else {
-    const el = document.createElement('div');
-    el.style.cssText = 'position:fixed;bottom:10px;left:10px;background:rgba(0,150,0,0.85);color:#fff;padding:8px 14px;font-size:12px;font-family:monospace;z-index:9999;border-radius:8px;';
-    el.textContent = '✓ All answers render OK';
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 4000);
-  }
-});
 </script>
 </body>
 </html>
